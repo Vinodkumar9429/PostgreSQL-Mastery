@@ -92,3 +92,42 @@ VALUES
 (3, 'AJ styles'),
 (3, 'Seth Rollins'),
 (3, 'Jon Jones');
+
+
+
+-- Many To Many : 
+
+CREATE TABLE students (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INT CHECK (age > 16)
+);
+
+CREATE TABLE courses (
+    id INT GENERATED ALWAYS AS INDENTITY PRIMARY KEY,
+    course_name TEXT NOT NULL
+);
+
+
+CREATE TABLE enrollments (
+    student_id INT,
+    course_id INT,
+    CONSTRAINT pkey_student_course PRIMARY KEY(student_id, course_id),
+    CONSTRAINT fkey_students_studentid FOREIGN KEY(student_id) REFERENCES students(id),
+    CONSTRAINT fkey_courses_courseid FOREIGN KEY (course_id) REFERENCES courses(id)
+);
+
+
+INSERT INTO students (name, age) VALUES ('Vinod', 21), ('jacquiline', 18), ('Yeshodha', 20);
+
+INSERT INTO courses (course_name) VALUES ('Maths'), ('Physics'), ('Chemistry'), ('Botany'), ('zoology'), ('commerce'), ('Computer science');
+
+INSERT INTO enrollments (student_id, course_id) 
+VALUES 
+(1,1),
+(1,2),
+(1,3),
+(1,5),
+(2,1),
+(2,5),
+(3,5);

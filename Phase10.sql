@@ -44,3 +44,10 @@ CREATE INDEX idx_users_email_phone ON users(name, email, phone);
     -- This is simple, you just either use single indexing or composite indexing but with a where condition :
 
     CREATE INDEX idx_users_phone ON users(phone) WHERE phone > 6000000000 AND phone < 9999999999; -- in the indian mobile numbers context, while it might not make sense because there won't be no number below that range at all but we are trying to eliminate indexing for spam numbers.
+
+
+-- Unique Indexing : 
+
+    -- Unique indexing is when you want the indexed column (or values in that reference table that gets created on indexing, to be unique) to be unique.
+
+    CREATE UNIQUE idx_users_phones ON users(phone);
